@@ -1,0 +1,10 @@
+---
+- name: restart icinga2
+  service: name=icinga2
+           state=restarted
+  delegate_to: "{{ icinga_server }}"
+
+- name: reload icinga2
+  service: name=icinga2
+           state=reloaded
+  delegate_to: "{{ icinga_server }}"
