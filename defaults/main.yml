@@ -1,2 +1,5 @@
 ---
 icinga2_template_base: generic-host-linux
+icinga2_template_nrpe_checks: []
+icinga2_template_tcp_ports: []
+icinga2_template_http_vhosts: []
