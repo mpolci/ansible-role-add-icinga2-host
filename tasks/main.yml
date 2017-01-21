@@ -1,0 +1,9 @@
+- assert:
+    that:
+      - icinga_server is defined
+
+- name: "icinga2 host configuration file"
+  template:
+    src: icinga2_host.conf.j2
+    dest: /etc/icinga2/conf.d/hosts/{{ inventory_hostname }}.conf
+  delegate_to: "{{ icinga_server }}"

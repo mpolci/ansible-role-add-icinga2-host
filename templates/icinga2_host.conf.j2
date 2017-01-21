@@ -1,0 +1,25 @@
+template Host "host-{{ inventory_hostname }}" {
+    import "{{ icinga2_template_base }}"
+
+{% if ansible_port %}
+    vars.ssh_port = {{ ansible_port }}
+{% endif %}
+
+{% for check in icinga2_template_tcp_ports %}
+    vars.tcp["{{ check.name }}"] = {
+        tcp_port = "{{ check.tcp_port }}"
+    }
+{% endfor %}
+
+{% for check in icinga2_template_nrpe_checks %}
+    vars.nrpe["{{ check.name }}"] = {
+        nrpe_command = "{{ check.nrpe_command }}"
+    }
+{% endfor %}
+
+}
+
+object Host "{{ inventory_hostname }}" {
+  import "host-{{ inventory_hostname }}"
+  address = "{{ ansible_host }}"
+}
