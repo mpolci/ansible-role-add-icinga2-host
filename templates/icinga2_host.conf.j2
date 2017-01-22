@@ -1,6 +1,10 @@
 template Host "host-{{ inventory_hostname }}" {
     import "{{ icinga2_template_base }}"
 
+{% if icinga2_template_custom_conf is defined %}
+    {{ icinga2_template_custom_conf }}
+{% endif %}
+
 {% if ansible_port is defined %}
     vars.ssh_port = {{ ansible_port }}
 {% endif %}
